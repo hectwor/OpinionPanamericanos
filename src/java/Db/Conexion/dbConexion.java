@@ -6,7 +6,8 @@
 package Db.Conexion;
 
 import com.mongodb.DB;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 /**
  *
  * @author usuario
@@ -15,15 +16,11 @@ public class dbConexion {
    private static DB con=null;
    public static DB getConnection(){
        if( con == null ){
-//            String driver="com.mysql.jdbc.Driver"; //el driver varia segun la DB que usemos
-//            String url="jdbc:mysql://localhost/sakila?autoReconnect=true";
-//            String pwd="";
-//            String usr="root";
-//            Class.forName(driver);
-//            con = DriverManager.getConnection(url,usr,pwd);
-//
-            Mongo mongo = new Mongo("Localhost",27017);
-            con = mongo.getDB("local");
+           MongoClientURI uri = new MongoClientURI(
+    "mongodb+srv://root:JFLrRorvKux6poDR@cluster0-ih4bu.mongodb.net/test?retryWrites=true&w=majority");
+           MongoClient mongo = new MongoClient(uri);
+            //Mongo mongo = new Mongo("Localhost",27017);
+            con = mongo.getDB("OpinionesPanamericanos");
             System.out.println("Conection Succesfull "+con.getName());
        }
      return con;
