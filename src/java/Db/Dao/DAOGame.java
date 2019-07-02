@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author hecto
  */
-public class DAOJuego implements IDAOJuego{
+public class DAOGame implements IDAOJuego{
 
     @Override
     public ArrayList<Juego> getListaJuegos() {

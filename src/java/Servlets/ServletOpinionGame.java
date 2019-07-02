@@ -5,11 +5,8 @@
  */
 package Servlets;
 
-import Db.Dao.DAOJuego;
-import Db.Modelos.Juego;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hecto
  */
-public class ServletJuego extends HttpServlet {
+public class ServletOpinionGame extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +35,10 @@ public class ServletJuego extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletJuego</title>");            
+            out.println("<title>Servlet ServletOpinionGame</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletJuego at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletOpinionGame at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,10 +56,7 @@ public class ServletJuego extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAOJuego dao = new DAOJuego();
-        ArrayList<Juego> direcciones = dao.getListaJuegos();
-        request.setAttribute("juegos", direcciones);
-        request.getRequestDispatcher("/principal.jsp").forward(request,response);
+        processRequest(request, response);
     }
 
     /**
@@ -76,14 +70,7 @@ public class ServletJuego extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*
-        int peso = Integer.parseInt(request.getParameter("peso"));
-        String contenido = request.getParameter("contenido");
-        
-        AbstractFactory factory=FactoryProducer.getFactory("Vehiculo");
-        Vehiculo vehiculo = factory.getVehiculo(peso, contenido);
-        request.setAttribute("vehiculo", vehiculo);
-        request.getRequestDispatcher("/mostrarVehiculo.jsp").forward(request,response);*/
+        processRequest(request, response);
     }
 
     /**

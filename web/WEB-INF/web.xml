@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>ServletJuego</servlet-name>
-        <servlet-class>Servlets.ServletJuego</servlet-class>
+        <servlet-name>ServletGame</servlet-name>
+        <servlet-class>Servlets.ServletGame</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletService</servlet-name>
+        <servlet-class>Servlets.ServletService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletVenues</servlet-name>
+        <servlet-class>Servlets.ServletVenues</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletOpinionGame</servlet-name>
+        <servlet-class>Servlets.ServletOpinionGame</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletOpinionService</servlet-name>
+        <servlet-class>Servlets.ServletOpinionService</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ServletJuego</servlet-name>
-        <url-pattern>/ServletJuego</url-pattern>
+        <servlet-name>ServletGame</servlet-name>
+        <url-pattern>/ServletGame</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletService</servlet-name>
+        <url-pattern>/ServletService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVenues</servlet-name>
+        <url-pattern>/ServletVenues</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletOpinionGame</servlet-name>
+        <url-pattern>/ServletOpinionGame</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletOpinionService</servlet-name>
+        <url-pattern>/ServletOpinionService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
