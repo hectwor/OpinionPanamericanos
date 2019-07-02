@@ -5,11 +5,13 @@
  */
 package Servlets;
 
-import Db.Dao.DAOGame;
-import Db.Modelos.Juego;
+import AbstractFactory.Interface.Opinion;
+import AbstractFactory.Producer.FactoryProducer;
+import AbstractFactory.method.AbstractFactory;
+import Db.Dao.DAOOpinion;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import static java.lang.Integer.parseInt;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hecto
  */
-public class ServletGame extends HttpServlet {
+public class ServletOpinionVenues extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +40,10 @@ public class ServletGame extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletJuego</title>");            
+            out.println("<title>Servlet ServletOpinionVenues</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletJuego at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletOpinionVenues at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,10 +61,7 @@ public class ServletGame extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAOGame dao = new DAOGame();
-        ArrayList<Juego> juegos = dao.getListaJuegos();
-        request.setAttribute("juegos", juegos);
-        request.getRequestDispatcher("/OpinionGame.jsp").forward(request,response);
+        processRequest(request, response);
     }
 
     /**
@@ -76,8 +75,22 @@ public class ServletGame extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*
-        */
+        String id_venue = request.getParameter("venue");
+        String namePerson = request.getParameter("namePerson");
+        int clasification = parseInt(request.getParameter("clasification"));
+        String comment = request.getParameter("comment");
+
+        AbstractFactory factory=FactoryProducer.getFactory("Opinion");
+        Opinion opinion = factory.getOpinion("rol-01", "Sede");
+        opinion.setIdPersona(namePerson);
+        opinion.setClasificacion(clasification);
+        opinion.setComentario(comment);
+        opinion.setId(id_venue);
+        
+        DAOOpinion dao = new DAOOpinion();
+        dao.realizarOpinion(opinion);
+        request.setAttribute("opinion", opinion);
+        request.getRequestDispatcher("/index.jsp").forward(request,response);
     }
 
     /**

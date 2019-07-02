@@ -20,6 +20,10 @@
         <servlet-name>ServletOpinionService</servlet-name>
         <servlet-class>Servlets.ServletOpinionService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletOpinionVenues</servlet-name>
+        <servlet-class>Servlets.ServletOpinionVenues</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletGame</servlet-name>
         <url-pattern>/ServletGame</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>ServletOpinionService</servlet-name>
         <url-pattern>/ServletOpinionService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletOpinionVenues</servlet-name>
+        <url-pattern>/ServletOpinionVenues</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

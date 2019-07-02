@@ -44,7 +44,7 @@
                     <!-- form starts here -->
                     <form action="ServletOpinionGame" method="post">
                         <div class="agile-field-txt">
-                            <select class = "form-control" name="AddressInicio" required>
+                            <select class = "form-control" name="game" required>
                                 <option value="-1" selected disabled>Select a game</option>
                                 <%
                                     for (Juego adr : juegos) {
@@ -58,13 +58,13 @@
                             </select>
                         </div>
                         <div class="agile-field-txt">
-                            <input class="form-control" type="text" name="nombrePersona" placeholder="Your Name" required="" />
+                            <input class="form-control" type="text" name="namePerson" placeholder="Your Name" required="" />
                         </div>
                         <div class="agile-field-txt">
-                            <input class="form-control" type="number" name="clasificacion" placeholder="Classification [1-10]" required="" />
+                            <input class="form-control" type="number" name="clasification" placeholder="Classification [1-10]" required="" />
                         </div>
                         <div class="agile-field-txt">
-                            <textarea class="form-control" type="text" name="comentario" placeholder="Enter a comment" required=""></textarea>
+                            <textarea class="form-control" type="text" name="comment" placeholder="Enter a comment" required=""></textarea>
                         </div>
                         <!--div class="agile-field-txt">
                                 <input type="password" name="password" placeholder="password" required="" id="myInput" />

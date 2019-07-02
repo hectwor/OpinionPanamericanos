@@ -5,8 +5,13 @@
  */
 package Servlets;
 
+import AbstractFactory.Interface.Opinion;
+import AbstractFactory.Producer.FactoryProducer;
+import AbstractFactory.method.AbstractFactory;
+import Db.Dao.DAOOpinion;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -70,7 +75,22 @@ public class ServletOpinionService extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id_service = request.getParameter("service");
+        String namePerson = request.getParameter("namePerson");
+        int clasification = parseInt(request.getParameter("clasification"));
+        String comment = request.getParameter("comment");
+
+        AbstractFactory factory=FactoryProducer.getFactory("Opinion");
+        Opinion opinion = factory.getOpinion("rol-01", "Servicio");
+        opinion.setIdPersona(namePerson);
+        opinion.setClasificacion(clasification);
+        opinion.setComentario(comment);
+        opinion.setId(id_service);
+        
+        DAOOpinion dao = new DAOOpinion();
+        dao.realizarOpinion(opinion);
+        request.setAttribute("opinion", opinion);
+        request.getRequestDispatcher("/index.jsp").forward(request,response);
     }
 
     /**

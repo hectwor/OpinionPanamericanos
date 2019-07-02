@@ -44,7 +44,7 @@
                     <!-- form starts here -->
                     <form action="ServletOpinionService" method="post" style="width: 600px" required>
                         <div class="agile-field-txt">
-                            <select class = "form-control" name="AddressInicio">
+                            <select class = "form-control"  name="venue" name="AddressInicio">
                                 <option value="-1" selected disabled>Select a venue</option>
                                 <%
                                     for (Sede adr : venue) {
