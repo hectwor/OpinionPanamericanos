@@ -1,7 +1,7 @@
 <%-- 
     Document   : mostrarVehiculo
-    Created on : 10/05/2018, 12:59:17 AM
-    Author     : Steve
+    Created on : 10/06/2019, 12:59:17 PM
+    Author     : Rogger Antonio Maita Asmat
 --%>
 
 <%@page import="AbstractFactory.Interface.Vehiculo"%>
