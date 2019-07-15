@@ -32,6 +32,22 @@
         <title>Opinion de Juegos</title>
         <%
             ArrayList<Juego> juegos = (ArrayList) request.getAttribute("juegos");
+            Cookie[] cookies = null;
+            cookies = request.getCookies();
+            String dni = "";
+            String nombre = "";
+
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equalsIgnoreCase("dni")) {
+                    dni = cookies[i].getValue();
+                }
+                if (cookies[i].getName().equalsIgnoreCase("name")) {
+                    nombre = cookies[i].getValue();
+                }
+            }
+            /*if (dni == null || dni.equalsIgnoreCase("") || dni.length() > 8) {
+        response.sendRedirect("index.jsp");
+    }*/
         %>
     </head>
     <body>
@@ -43,9 +59,13 @@
                 <div class="col-sm-6" style="margin-top: 100px">
                     <!-- form starts here -->
                     <form action="ServletOpinionGame" method="post">
+                        <label>Número de DNI</label>
+                        <div class="agile-field-txt">
+                            <input class="form-control" type="text" name="namePerson" value='<%=dni%>' disabled/>
+                        </div>
                         <div class="agile-field-txt">
                             <select class = "form-control" name="game" required>
-                                <option value="-1" selected disabled>Select a game</option>
+                                <option value="-1" selected disabled>Seleccione un juego</option>
                                 <%
                                     for (Juego adr : juegos) {
 
@@ -58,13 +78,10 @@
                             </select>
                         </div>
                         <div class="agile-field-txt">
-                            <input class="form-control" type="text" name="namePerson" placeholder="Your Name" required="" />
+                            <input class="form-control" type="number" name="clasification" placeholder="Calificación [1-10]" required="" />
                         </div>
                         <div class="agile-field-txt">
-                            <input class="form-control" type="number" name="clasification" placeholder="Classification [1-10]" required="" />
-                        </div>
-                        <div class="agile-field-txt">
-                            <textarea class="form-control" type="text" name="comment" placeholder="Enter a comment" required=""></textarea>
+                            <textarea class="form-control" type="text" name="comment" placeholder="Ingrese un comentario" required=""></textarea>
                         </div>
                         <!--div class="agile-field-txt">
                                 <input type="password" name="password" placeholder="password" required="" id="myInput" />
@@ -74,13 +91,13 @@
                         </div>
                 </div-->
                         <div class="w3ls-bot">
-                            <input type="submit" value="SEND">
+                            <input type="submit" value="ENVIAR">
                         </div>
                         <div class="w3ls-bot">
                             <a class="btn btn-block" href="/OpinionPanamericanos">Regresar</a>
                         </div>
                     </form>
-                                
+
                 </div>
             </div>
         </div>

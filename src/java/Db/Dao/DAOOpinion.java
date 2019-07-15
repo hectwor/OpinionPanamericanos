@@ -23,29 +23,29 @@ public class DAOOpinion implements IDAOOpinion{
         System.out.println(op);
         BasicDBObject document = new BasicDBObject();
         if("Juego".equals(op.getTipo())){
-            document.put("persona","'"+op.getIdPersona()+"'");
-            document.put("comentario","'"+op.getComentario()+"'");
-            document.put("calificacion","'"+op.getClasificacion()+"'");
-            document.put("id_juego","'"+op.getId()+"'");
+            document.put("persona",op.getIdPersona());
+            document.put("comentario",op.getComentario());
+            document.put("calificacion",op.getClasificacion());
+            document.put("id_juego",op.getId());
 
             DB mdb = dbConexion.getConnection();
             DBCollection persona = mdb.getCollection("OpinionJuego");
             persona.insert(document);
         }else if("Sede".equals(op.getTipo())){
-            document.put("persona","'"+op.getIdPersona()+"'");
-            document.put("comentario","'"+op.getComentario()+"'");
-            document.put("calificacion","'"+op.getClasificacion()+"'");
-            document.put("id_sede","'"+op.getId()+"'");
+            document.put("persona",op.getIdPersona());
+            document.put("comentario",op.getComentario());
+            document.put("calificacion",op.getClasificacion());
+            document.put("id_sede",op.getId());
 
             DB mdb = dbConexion.getConnection();
             DBCollection persona = mdb.getCollection("OpinionSede");
             persona.insert(document);
         }
         else if("Servicio".equals(op.getTipo())){
-            document.put("persona","'"+op.getIdPersona()+"'");
-            document.put("comentario","'"+op.getComentario()+"'");
-            document.put("calificacion","'"+op.getClasificacion()+"'");
-            document.put("id_servicio","'"+op.getId()+"'");
+            document.put("persona",op.getIdPersona());
+            document.put("comentario",op.getComentario());
+            document.put("calificacion",op.getClasificacion());
+            document.put("id_servicio",op.getId());
             
             DB mdb = dbConexion.getConnection();
             DBCollection persona = mdb.getCollection("OpinionServicio");

@@ -45,12 +45,12 @@ public class DAOPersona implements IDAOPersona{
     @Override
     public void nuevaPersona(Persona nueva) {
         BasicDBObject document = new BasicDBObject();
-        document.put("nombre","'"+nueva.getNombre()+"'");
-        document.put("apellidoPaterno","'"+nueva.getApellidoMaterno()+"'");
-        document.put("apellidoMaterno","'"+nueva.getApellidoPaterno()+"'");
-        document.put("dni","'"+nueva.getDni()+"'");
-        document.put("contrasena","'"+nueva.getContrasena()+"'");
-        document.put("_idRol","'"+nueva.getIdRol()+"'");
+        document.put("nombre",nueva.getNombre());
+        document.put("apellidoPaterno",nueva.getApellidoMaterno());
+        document.put("apellidoMaterno",nueva.getApellidoPaterno());
+        document.put("dni",nueva.getDni());
+        document.put("contrasena",nueva.getContrasena());
+        document.put("_idRol",nueva.getIdRol());
         
         DB mdb = dbConexion.getConnection();
         DBCollection persona = mdb.getCollection("Persona");

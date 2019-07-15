@@ -89,8 +89,7 @@ public class ServletOpinionGame extends HttpServlet {
         opinion.setId(id_game);
         DAOOpinion dao = new DAOOpinion();
         dao.realizarOpinion(opinion);
-        request.setAttribute("opinion", opinion);
-        request.getRequestDispatcher("/index.jsp").forward(request,response);
+        response.sendRedirect("index.jsp?cod=1");
     }
 
     /**

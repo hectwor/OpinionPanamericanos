@@ -5,14 +5,13 @@
  */
 package Servlets;
 
-import AbstractFactory.Interface.Opinion;
-import AbstractFactory.Producer.FactoryProducer;
-import AbstractFactory.method.AbstractFactory;
-import Db.Dao.DAOOpinion;
+import Db.Dao.DAOPersona;
+import Db.Modelos.Persona;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hecto
  */
-public class ServletOpinionService extends HttpServlet {
+public class ServletLogin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +39,10 @@ public class ServletOpinionService extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletOpinionService</title>");            
+            out.println("<title>Servlet ServletLogin</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletOpinionService at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletLogin at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +60,38 @@ public class ServletOpinionService extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String dni = request.getParameter("dni");
+        String pass = request.getParameter("pass");
+        
+        DAOPersona person = new DAOPersona();
+        ArrayList<Persona> persons = new ArrayList();
+        persons = person.getListaPersonas();
+        String resp="3";
+        for (Persona p : persons) {
+            if(dni.equals(p.getDni())){
+                if(pass.equals(p.getContrasena())){
+                    resp ="1";
+                    Cookie cookie = new Cookie("dni", dni);
+                    cookie.setMaxAge(60 * 60 * 24 * 7 * 360);
+                    response.addCookie(cookie);
+                }else
+                    resp ="2";
+            }
+        }
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("{"
+                    + "\"resp\":\""
+                    +resp
+                    + "\"}");
+
+        }
+        
+    }
+    public String validar(){
+        
+        return "";
     }
 
     /**
@@ -75,21 +105,7 @@ public class ServletOpinionService extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id_service = request.getParameter("service");
-        String namePerson = request.getParameter("namePerson");
-        int clasification = parseInt(request.getParameter("clasification"));
-        String comment = request.getParameter("comment");
-        
-        AbstractFactory factory=FactoryProducer.getFactory("Opinion");
-        Opinion opinion = factory.getOpinion("rol-01", "Servicio");
-        opinion.setIdPersona(namePerson);
-        opinion.setClasificacion(clasification);
-        opinion.setComentario(comment);
-        opinion.setId(id_service);
-    
-        DAOOpinion dao = new DAOOpinion();
-        dao.realizarOpinion(opinion);
-        response.sendRedirect("index.jsp?cod=1");
+        processRequest(request, response);
     }
 
     /**

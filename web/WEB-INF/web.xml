@@ -24,6 +24,14 @@
         <servlet-name>ServletOpinionVenues</servlet-name>
         <servlet-class>Servlets.ServletOpinionVenues</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletRegister</servlet-name>
+        <servlet-class>Servlets.ServletRegister</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletLogin</servlet-name>
+        <servlet-class>Servlets.ServletLogin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletGame</servlet-name>
         <url-pattern>/ServletGame</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>ServletOpinionVenues</servlet-name>
         <url-pattern>/ServletOpinionVenues</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletRegister</servlet-name>
+        <url-pattern>/ServletRegister</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletLogin</servlet-name>
+        <url-pattern>/ServletLogin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -11,15 +11,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script>
-            addEventListener("load", function () {
-                setTimeout(hideURLbar, 0);
-            }, false);
-
-            function hideURLbar() {
-                window.scrollTo(0, 1);
-            }
-        </script>
         <!-- //Meta-Tags -->
         <!-- Stylesheets -->
         <link href="css/style.css" rel='stylesheet' type='text/css' />
@@ -32,6 +23,19 @@
         <title>Opinion de Servicios</title>
         <%
             ArrayList<Sede> venue = (ArrayList) request.getAttribute("venues");
+            Cookie[] cookies = null;
+            cookies = request.getCookies();
+            String dni = "";
+            String nombre = "";
+
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equalsIgnoreCase("dni")) {
+                    dni = cookies[i].getValue();
+                }
+                if (cookies[i].getName().equalsIgnoreCase("name")) {
+                    nombre = cookies[i].getValue();
+                }
+            }
         %>
     </head>
     <body>
@@ -43,9 +47,13 @@
                 <div class="col-sm-6" style="margin-top: 100px">
                     <!-- form starts here -->
                     <form action="ServletOpinionService" method="post" style="width: 600px" required>
+                        <label>Número de DNI</label>
                         <div class="agile-field-txt">
-                            <select class = "form-control"  name="venue" name="AddressInicio">
-                                <option value="-1" selected disabled>Select a venue</option>
+                            <input class="form-control" type="text" name="namePerson" value='<%=dni%>' disabled/>
+                        </div>
+                        <div class="agile-field-txt">
+                            <select class = "form-control"  name="venue">
+                                <option value="-1" selected disabled>Seleccione una sede</option>
                                 <%
                                     for (Sede adr : venue) {
 
@@ -58,13 +66,10 @@
                             </select>
                         </div>
                         <div class="agile-field-txt">
-                            <input class="form-control" type="text" name="nombrePersona" placeholder="Your Name" required="" />
+                            <input class="form-control" type="number" name="clasification" placeholder="Calificación [1-10]" required="" />
                         </div>
                         <div class="agile-field-txt">
-                            <input class="form-control" type="number" name="clasificacion" placeholder="Classification [1-10]" required="" />
-                        </div>
-                        <div class="agile-field-txt">
-                            <textarea class="form-control" type="text" name="comentario" placeholder="Enter a comment" required=""></textarea>
+                            <textarea class="form-control" type="text" name="comentario" placeholder="Ingrese un comentario" required=""></textarea>
                         </div>
                         <!--div class="agile-field-txt">
                                 <input type="password" name="password" placeholder="password" required="" id="myInput" />
@@ -74,7 +79,7 @@
                         </div>
                 </div-->
                         <div class="w3ls-bot">
-                            <input type="submit" value="SEND">
+                            <input type="submit" value="Enviar">
                         </div>
                          <div class="w3ls-bot">
                             <a class="btn btn-block" href="/OpinionPanamericanos">Regresar</a>

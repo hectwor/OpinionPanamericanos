@@ -5,13 +5,10 @@
  */
 package Servlets;
 
-import AbstractFactory.Interface.Opinion;
-import AbstractFactory.Producer.FactoryProducer;
-import AbstractFactory.method.AbstractFactory;
-import Db.Dao.DAOOpinion;
+import Db.Dao.DAOPersona;
+import Db.Modelos.Persona;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Integer.parseInt;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hecto
  */
-public class ServletOpinionService extends HttpServlet {
+public class ServletRegister extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,10 @@ public class ServletOpinionService extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletOpinionService</title>");            
+            out.println("<title>Servlet ServletRegister</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletOpinionService at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletRegister at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +58,7 @@ public class ServletOpinionService extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("/Register.jsp").forward(request,response);
     }
 
     /**
@@ -75,21 +72,18 @@ public class ServletOpinionService extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id_service = request.getParameter("service");
-        String namePerson = request.getParameter("namePerson");
-        int clasification = parseInt(request.getParameter("clasification"));
-        String comment = request.getParameter("comment");
+        String dni = request.getParameter("dni");
+        String name = request.getParameter("name");
+        String lastNameP = request.getParameter("lastNameP");
+        String lastNameM = request.getParameter("lastNameM");
+        String pass = request.getParameter("pass");
+        String rol = request.getParameter("rol");
         
-        AbstractFactory factory=FactoryProducer.getFactory("Opinion");
-        Opinion opinion = factory.getOpinion("rol-01", "Servicio");
-        opinion.setIdPersona(namePerson);
-        opinion.setClasificacion(clasification);
-        opinion.setComentario(comment);
-        opinion.setId(id_service);
-    
-        DAOOpinion dao = new DAOOpinion();
-        dao.realizarOpinion(opinion);
-        response.sendRedirect("index.jsp?cod=1");
+        Persona person = new Persona(name, lastNameP, lastNameM, dni, pass, rol);
+        DAOPersona dao = new DAOPersona();
+        dao.nuevaPersona(person);
+        request.setAttribute("opinion", "Nuevo Usuario Correcto");
+        request.getRequestDispatcher("/index.jsp").forward(request,response);
     }
 
     /**

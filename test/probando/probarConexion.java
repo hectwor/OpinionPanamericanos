@@ -9,7 +9,7 @@ import Db.Conexion.dbConexion;
  *
  * @author usuario
  */
-public class probandoxd {
+public class probarConexion {
     public static void main(String[] args) {
         dbConexion.getConnection();
         
