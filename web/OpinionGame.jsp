@@ -12,12 +12,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script>
-            addEventListener("load", function () {
-                setTimeout(hideURLbar, 0);
-            }, false);
-
-            function hideURLbar() {
-                window.scrollTo(0, 1);
+            function changeMethod(e) {
+                var value = e.value;
+                if (value === "score") {
+                    document.getElementById("score").style.display = 'block';
+                    document.getElementById("range").style.display = 'none';
+                } else if (value === "range") {
+                    document.getElementById("score").style.display = 'none';
+                    document.getElementById("range").style.display = 'block';
+                }
             }
         </script>
         <!-- //Meta-Tags -->
@@ -61,7 +64,7 @@
                     <form action="ServletOpinionGame" method="post">
                         <label>Número de DNI</label>
                         <div class="agile-field-txt">
-                            <input class="form-control" type="text" name="namePerson" value='<%=dni%>' disabled/>
+                            <input class="form-control" type="text" name="namePerson" value='<%=dni%>' readonly="readonly"/>
                         </div>
                         <div class="agile-field-txt">
                             <select class = "form-control" name="game" required>
@@ -78,7 +81,41 @@
                             </select>
                         </div>
                         <div class="agile-field-txt">
-                            <input class="form-control" type="number" name="clasification" placeholder="Calificación [1-10]" required="" />
+                            <select class = "form-control" name="SelectCalication" onchange = "changeMethod(this);" required>
+                                <option value="-1" selected disabled>Seleccione un método de calificación</option>
+                                <option value="score">Puntuación</option>
+                                <option value="range">Rangos</option>
+                            </select>
+                        </div>  
+                        <div class="agile-field-txt" id="score" style="display: none">
+                            <input class="form-control" type="number" name="clasificationScore" placeholder="Calificación [1-100]" />
+                        </div>
+                        <div class="agile-field-txt" id="range" style="display: none">
+                            <div class="form-check-inline" selected> 
+                                <label class="form-check-label" >
+                                    <input type="radio" class="form-check-input" name="clasificationRange" checked="checked">0/20
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="clasificationRange">20/40
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="clasificationRange" >40/60
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="clasificationRange" >60/80
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="clasificationRange" >80/100
+                                </label>
+                            </div>
                         </div>
                         <div class="agile-field-txt">
                             <textarea class="form-control" type="text" name="comment" placeholder="Ingrese un comentario" required=""></textarea>

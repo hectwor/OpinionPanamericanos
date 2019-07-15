@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AbstractFactory.Interface;
+package Strategy;
 
 /**
  *
- * @author usuario
+ * @author hecto
  */
-public abstract class Vehiculo {
-    int peso;
-    String contenido;
-    public abstract String getTipo();
+public interface ValueStrategy {
+    public int evaluate();
 }
