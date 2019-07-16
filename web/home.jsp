@@ -41,6 +41,7 @@
                 confirmButtonText: 'Correcto'
             });
             location.href = '#header';
+            $("#modalLogin").modal()
         } else {
             switch (tipo) {
                 case "juego":

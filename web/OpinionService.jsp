@@ -11,6 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script>
             function changeMethod(e) {
                 var value = e.value;
@@ -65,10 +66,14 @@
                 <div class="col-sm text-center card text-white bg-info mb-3" >
                     <div class="card-body">
                         <!-- form starts here -->
+                        <h1>Opinion de Sedes</h1>
+                        <br/>
                         <form action="ServletOpinionService" method="post">
-                            <label>Número de DNI</label>
-                            <div class="agile-field-txt">
-                                <input class="form-control" type="text" name="namePerson" value='<%=dni%>' readonly="readonly"/>
+                            <div class="agile-field-txt row">
+                                <label for="namePerson" class="col-sm-6 col-form-label">Número de DNI</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="namePerson" value='<%=dni%>' readonly="readonly"/>    
+                                </div>
                             </div>
                             <br/>
                             <div class="agile-field-txt">
