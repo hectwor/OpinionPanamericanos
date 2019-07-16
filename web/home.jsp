@@ -27,12 +27,13 @@
         });
     }
     function logout() {
-        document.cookie = "dni="
+        document.cookie = "dni=";
+        document.cookie = "name=";
         location.href = 'index.jsp';
     }
     function validar(tipo) {
 
-        if ("<%=dni%>" == "") {
+        if ("<%=dni%>" === "") {
             Swal.fire({
                 title: 'Error',
                 text: 'Debe ingresar al sistema',
@@ -62,30 +63,29 @@
 <div class="main-wrapper-first">
     <div class="hero-area relative">
         <header id="header">
-            <div class="container">
-                <div class="header-wrap">
-                    <div >
-                        <nav class="navbar navbar-expand-sm navbar-light">
-                            <%if (dni.equalsIgnoreCase("")) {%>   
-                            <a class="navbar-brand" ></a>
-                            <%} else {%>
-                            <a class="navbar-brand" >Bienvenido </a>
+            <nav class="navbar navbar-expand-sm navbar-light">
+                <%if (dni.equalsIgnoreCase("")) {%>   
+                <a class="navbar-brand" ></a>
+                <%} else {%>
+                <a class="navbar-brand" >Bienvenido <%=nombre%></a>
+                <%}%>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <%if (!dni.equalsIgnoreCase("")) {%>
+                            <a  class="nav-link" style="cursor:pointer;" href="ServletMyComments">Mis comentarios</a>
                             <%}%>
-                            <div class="collapse navbar-collapse" id="navbarNav">
-                                <ul class="nav navbar-nav ml-auto">
-                                    <li class="nav-item">
-                                        <%if (dni.equalsIgnoreCase("")) {%>   
-                                        <a  class="nav-link" style="cursor:pointer;" data-toggle="modal" data-target="#modalLogin">Ingresar/Registrar</a>
-                                        <%} else {%>
-                                        <a  class="nav-link" style="cursor:pointer;" onclick="logout()">Cerrar Sesión</a>
-                                        <%}%>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
+                        </li>
+                        <li class="nav-item">
+                            <%if (dni.equalsIgnoreCase("")) {%>   
+                            <a  class="nav-link" style="cursor:pointer;" data-toggle="modal" data-target="#modalLogin">Ingresar/Registrar</a>
+                            <%} else {%>
+                            <a  class="nav-link" style="cursor:pointer;" onclick="logout()">Cerrar Sesión</a>
+                            <%}%>
+                        </li>
+                    </ul>
                 </div>
-            </div>
+            </nav>
         </header>
         <div class="banner-area">
             <div class="container">

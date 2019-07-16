@@ -22,7 +22,6 @@
         <link rel="stylesheet" href="css/nice-select.css">
         <link rel="stylesheet" href="css/magnific-popup.css">
         <link rel="stylesheet" href="css/main.css">
-        <link href="css/style.css" rel='stylesheet' type='text/css' />
         <!--// Stylesheets -->
         <!--online fonts-->
         <link href="//fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -112,10 +111,11 @@
                             <div class="agile-field-txt">
                                 <input class="form-control" type="text" id="nameModal" name="namePerson" placeholder="DNI" onkeypress="pulsar(event)" required="" />
                             </div>
+                            <br/>
                             <div class="agile-field-txt">
                                 <input class="form-control" type="text" id="passModal" name="password" placeholder="Contraseña" onkeypress="pulsar(event)" required="" />
                             </div>
-                            <div style="text-align: left">
+                            <div style="text-align: right">
                                 <a href="ServletRegister"><span>Registrarme</span></a>
                             </div>
 

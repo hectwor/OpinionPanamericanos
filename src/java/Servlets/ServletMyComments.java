@@ -5,11 +5,9 @@
  */
 package Servlets;
 
-import Db.Dao.DAOPersona;
-import Db.Modelos.Persona;
+import Db.Dao.DAOOpinion;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hecto
  */
-public class ServletLogin extends HttpServlet {
+public class ServletMyComments extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +37,10 @@ public class ServletLogin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletLogin</title>");            
+            out.println("<title>Servlet ServletMyComments</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletLogin at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletMyComments at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,41 +58,27 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String dni = request.getParameter("dni");
-        String pass = request.getParameter("pass");
-        
-        DAOPersona person = new DAOPersona();
-        ArrayList<Persona> persons = new ArrayList();
-        persons = person.getListaPersonas();
-        String resp="3";
-        for (Persona p : persons) {
-            if(dni.equals(p.getDni())){
-                if(pass.equals(p.getContrasena())){
-                    resp ="1";
-                    Cookie cookie = new Cookie("dni", p.getDni());
-                    cookie.setMaxAge(60 * 60 * 24 * 7 * 360);
-                    Cookie cookie2 = new Cookie("name", p.getNombre());
-                    cookie2.setMaxAge(60 * 60 * 24 * 7 * 360);
-                    response.addCookie(cookie);
-                    response.addCookie(cookie2);
-                }else
-                    resp ="2";
+        Cookie[] cookies = null;
+        cookies = request.getCookies();
+        String dni = "";
+        String nombre = "";
+
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equalsIgnoreCase("dni")) {
+                dni = cookies[i].getValue();
+            }
+            if (cookies[i].getName().equalsIgnoreCase("name")) {
+                nombre = cookies[i].getValue();
             }
         }
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("{"
-                    + "\"resp\":\""
-                    +resp
-                    + "\"}");
-
-        }
+        DAOOpinion daoGame = new DAOOpinion();
+        DAOOpinion daoService = new DAOOpinion();
+        DAOOpinion daoVenue = new DAOOpinion();
         
-    }
-    public String validar(){
-        
-        return "";
+        request.setAttribute("game", daoGame.getOpinion("game", dni));
+        request.setAttribute("service", daoService.getOpinion("service", dni));
+        request.setAttribute("venues", daoVenue.getOpinion("venues", dni));
+        request.getRequestDispatcher("/MyComments.jsp").forward(request, response);
     }
 
     /**

@@ -32,6 +32,10 @@
         <servlet-name>ServletLogin</servlet-name>
         <servlet-class>Servlets.ServletLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletMyComments</servlet-name>
+        <servlet-class>Servlets.ServletMyComments</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletGame</servlet-name>
         <url-pattern>/ServletGame</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/ServletLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletMyComments</servlet-name>
+        <url-pattern>/ServletMyComments</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -3,27 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AbstractFactory.Interface;
+package Prototype;
 
 /**
  *
  * @author hecto
  */
-public abstract class Opinion {
+public abstract class OpinionPrototype implements Cloneable {
 
     String idPersona;
     String id;
+    String nombre;
     int clasificacion;
     String comentario;
 
-    public abstract String getTipo();
-
-    public String getId() {
-        return id;
+    public OpinionPrototype clone() throws CloneNotSupportedException {
+        return (OpinionPrototype) super.clone();
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getIdPersona() {
@@ -32,6 +35,14 @@ public abstract class Opinion {
 
     public void setIdPersona(String idPersona) {
         this.idPersona = idPersona;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getClasificacion() {

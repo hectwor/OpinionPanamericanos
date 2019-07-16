@@ -6,6 +6,8 @@
 package Db.IDao;
 
 import AbstractFactory.Interface.Opinion;
+import Prototype.OpinionPrototype;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,4 +15,6 @@ import AbstractFactory.Interface.Opinion;
  */
 public interface IDAOOpinion {
     public void realizarOpinion(Opinion op);
+    
+    public ArrayList<OpinionPrototype> getOpinion(String tipo, String dni);
 }
