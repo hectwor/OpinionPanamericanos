@@ -10,6 +10,7 @@ import AbstractFactory.Producer.FactoryProducer;
 import AbstractFactory.method.AbstractFactory;
 import Db.Dao.DAOOpinion;
 import Strategy.RangeStrategy;
+import Strategy.RomanStrategy;
 import Strategy.ScoreStrategy;
 import Strategy.ValueStrategy;
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class ServletOpinionService extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletOpinionService</title>");            
+            out.println("<title>Servlet ServletOpinionService</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ServletOpinionService at " + request.getContextPath() + "</h1>");
@@ -84,23 +85,24 @@ public class ServletOpinionService extends HttpServlet {
         String type = request.getParameter("SelectCalication");
         ValueStrategy strategy = new ScoreStrategy(0);
         String resp = "";
-        if(type.equalsIgnoreCase("score")){
-             strategy = new ScoreStrategy(parseInt(request.getParameter("clasificationScore")));
-        }else if(type.equalsIgnoreCase("range")){
+        if (type.equalsIgnoreCase("score")) {
+            strategy = new ScoreStrategy(parseInt(request.getParameter("clasificationScore")));
+        } else if (type.equalsIgnoreCase("range")) {
             resp = request.getParameter("clasificationRange");
-            String selected = (resp.equals("20/40")?"20/40":resp.equals("40/60")?
-                             "40/60":resp.equals("60/80")?"60/80":"80/100");
+            String selected = (resp.equals("20/40") ? "20/40" : resp.equals("40/60")
+                    ? "40/60" : resp.equals("60/80") ? "60/80" : "80/100");
             String[] parts = selected.split("/");
-            System.out.println(selected);
             strategy = new RangeStrategy(parseInt(parts[0]), parseInt(parts[1]));
+        } else if (type.equalsIgnoreCase("roman")) {
+            strategy = new RomanStrategy(request.getParameter("clasificationRoman"));
         }
-        AbstractFactory factory=FactoryProducer.getFactory("Opinion");
+        AbstractFactory factory = FactoryProducer.getFactory("Opinion");
         Opinion opinion = factory.getOpinion("rol-01", "Servicio");
         opinion.setIdPersona(namePerson);
         opinion.setClasificacion(strategy.evaluate());
         opinion.setComentario(comment);
         opinion.setId(id_service);
-    
+
         DAOOpinion dao = new DAOOpinion();
         dao.realizarOpinion(opinion);
         response.sendRedirect("index.jsp?cod=1");

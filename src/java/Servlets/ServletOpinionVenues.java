@@ -10,6 +10,7 @@ import AbstractFactory.Producer.FactoryProducer;
 import AbstractFactory.method.AbstractFactory;
 import Db.Dao.DAOOpinion;
 import Strategy.RangeStrategy;
+import Strategy.RomanStrategy;
 import Strategy.ScoreStrategy;
 import Strategy.ValueStrategy;
 import java.io.IOException;
@@ -91,8 +92,9 @@ public class ServletOpinionVenues extends HttpServlet {
             String selected = (resp.equals("20/40") ? "20/40" : resp.equals("40/60")
                     ? "40/60" : resp.equals("60/80") ? "60/80" : "80/100");
             String[] parts = selected.split("/");
-            System.out.println(selected);
             strategy = new RangeStrategy(parseInt(parts[0]), parseInt(parts[1]));
+        }else if(type.equalsIgnoreCase("roman")){
+            strategy = new RomanStrategy(request.getParameter("clasificationRoman"));
         }
         AbstractFactory factory = FactoryProducer.getFactory("Opinion");
         Opinion opinion = factory.getOpinion("rol-01", "Sede");

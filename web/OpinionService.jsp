@@ -17,9 +17,15 @@
                 if (value === "score") {
                     document.getElementById("score").style.display = 'block';
                     document.getElementById("range").style.display = 'none';
+                    document.getElementById("roman").style.display = 'none';
                 } else if (value === "range") {
                     document.getElementById("score").style.display = 'none';
                     document.getElementById("range").style.display = 'block';
+                    document.getElementById("roman").style.display = 'none';
+                } else if (value === "roman") {
+                    document.getElementById("score").style.display = 'none';
+                    document.getElementById("range").style.display = 'none';
+                    document.getElementById("roman").style.display = 'block';
                 }
             }
         </script>
@@ -82,6 +88,7 @@
                                 <option value="-1" selected disabled>Seleccione un método de calificación</option>
                                 <option value="score">Puntuación</option>
                                 <option value="range">Rangos</option>
+                                <option value="roman">Números Romanos</option>
                             </select>
                         </div>  
                         <div class="agile-field-txt" id="score" style="display: none">
@@ -114,20 +121,16 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="agile-field-txt" id="roman" style="display: none">
+                            <input class="form-control" type="text" name="clasificationRoman" placeholder="Calificación [ROMAN]" />
+                        </div>
                         <div class="agile-field-txt">
                             <textarea class="form-control" type="text" name="comment" placeholder="Ingrese un comentario" required=""></textarea>
                         </div>
-                        <!--div class="agile-field-txt">
-                                <input type="password" name="password" placeholder="password" required="" id="myInput" />
-                        <!--div class="agile_label">
-                                <input id="check3" name="check3" type="checkbox" value="show password">
-                                <label class="check" for="check3">Remember me</label>
-                        </div>
-                </div-->
                         <div class="w3ls-bot">
                             <input type="submit" value="Enviar">
                         </div>
-                         <div class="w3ls-bot">
+                        <div class="w3ls-bot">
                             <a class="btn btn-block" href="/OpinionPanamericanos">Regresar</a>
                         </div>
                     </form>
