@@ -18,6 +18,8 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -63,6 +65,9 @@ public class DAOOpinion implements IDAOOpinion {
     @Override
     public ArrayList<OpinionPrototype> getOpinion(String tipo, String dni) {
         ArrayList<OpinionPrototype> aux = new ArrayList<>();
+        OpinionPrototype opinion = new OpinionGame();
+        OpinionPrototype opinionService = new OpinionService();
+        OpinionPrototype opinionVenue = new OpinionVenue();
         DBCollection collection = null;
         DB mdb = dbConexion.getConnection();
         if (tipo.equalsIgnoreCase("game")) {
@@ -70,7 +75,13 @@ public class DAOOpinion implements IDAOOpinion {
             DBCursor cursor = collection.find();
             while (cursor.hasNext()) {
                 DBObject document = cursor.next();
-                OpinionGame opiniongame = new OpinionGame();
+                OpinionGame opiniongame = null;
+                try {
+                    opiniongame = (OpinionGame) opinion.clone();
+                } catch (CloneNotSupportedException ex) {
+                    Logger.getLogger(DAOOpinion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 opiniongame.setId((String) document.get("id_juego").toString());
 
                 String name = "";
@@ -96,7 +107,12 @@ public class DAOOpinion implements IDAOOpinion {
             DBCursor cursor = collection.find();
             while (cursor.hasNext()) {
                 DBObject document = cursor.next();
-                OpinionService opinionservice = new OpinionService();
+                OpinionService opinionservice = null;
+                try {
+                    opinionservice = (OpinionService) opinionService.clone();
+                } catch (CloneNotSupportedException ex) {
+                    Logger.getLogger(DAOOpinion.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 opinionservice.setId((String) document.get("id_servicio").toString());
 
                 String name = "";
@@ -122,7 +138,12 @@ public class DAOOpinion implements IDAOOpinion {
             DBCursor cursor = collection.find();
             while (cursor.hasNext()) {
                 DBObject document = cursor.next();
-                OpinionVenue opinionvenue = new OpinionVenue();
+                OpinionVenue opinionvenue = null;
+                try {
+                    opinionvenue = (OpinionVenue) opinionVenue.clone();
+                } catch (CloneNotSupportedException ex) {
+                    Logger.getLogger(DAOOpinion.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 opinionvenue.setId((String) document.get("id_sede").toString());
 
                 String name = "";
