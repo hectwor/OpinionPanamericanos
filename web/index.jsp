@@ -113,7 +113,7 @@
                             </div>
                             <br/>
                             <div class="agile-field-txt">
-                                <input class="form-control" type="text" id="passModal" name="password" placeholder="Contraseña" onkeypress="pulsar(event)" required="" />
+                                <input class="form-control" type="password" id="passModal" name="password" placeholder="Contraseña" onkeypress="pulsar(event)" required="" />
                             </div>
                             <div style="text-align: right">
                                 <a href="ServletRegister"><span>Registrarme</span></a>

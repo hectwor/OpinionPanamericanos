@@ -12,6 +12,7 @@ import Prototype.OpinionGame;
 import Prototype.OpinionPrototype;
 import Prototype.OpinionService;
 import Prototype.OpinionVenue;
+import Proxy.SaveData;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -29,7 +30,6 @@ public class DAOOpinion implements IDAOOpinion {
 
     @Override
     public void realizarOpinion(Opinion op) {
-        System.out.println(op);
         BasicDBObject document = new BasicDBObject();
         if ("Juego".equals(op.getTipo())) {
             document.put("persona", op.getIdPersona());
@@ -59,7 +59,8 @@ public class DAOOpinion implements IDAOOpinion {
             DBCollection persona = mdb.getCollection("OpinionServicio");
             persona.insert(document);
         }
-
+        SaveData save = new SaveData();
+        save.save(op.getIdPersona());
     }
 
     @Override

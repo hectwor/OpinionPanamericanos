@@ -30,8 +30,6 @@
             }
         </script>
         <!-- //Meta-Tags -->
-        <!-- Stylesheets -->
-        <link href="css/style.css" rel='stylesheet' type='text/css' />
         <!--// Stylesheets -->
         <!--online fonts-->
         <link href="//fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -56,84 +54,93 @@
             }
         %>
     </head>
-    <body>
-        <div class="w3ls-login box">
-            <div class="row"class="align-items-center">
-                <div class="col-sm-6" style="margin-top: 100px">
-                    <img src="img/estadioejemplo.png" alt="logo_img" />
+    <body style="background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);">
+        <div class="container" >
+            <div class="row" style="margin-top: 100px">
+                <div class="col-sm text-center">
+                    <div  style="height: 400px; width: 400px">
+                        <img src="img/estadioejemplo.png" alt="logo_img"  style="height: 100%; width: 100%"/>
+                    </div>
                 </div>
-                <div class="col-sm-6" style="margin-top: 100px">
-                    <!-- form starts here -->
-                    <form action="ServletOpinionVenues" method="post" style="width: 600px" required>
-                        <label>Número de DNI</label>
-                        <div class="agile-field-txt">
-                            <input class="form-control" type="text" name="namePerson" value='<%=dni%>'  readonly="readonly"/>
-                        </div>
-                        <div class="agile-field-txt">
-                            <select class = "form-control"  name="venue" required>
-                                <option value="-1" selected disabled>Seleccione una sede</option>
-                                <%
-                                    for (Sede adr : venue) {
+                <div class="col-sm text-center card text-white bg-info mb-3">
+                    <div class="card-body">
+                        <!-- form starts here -->
+                        <form action="ServletOpinionVenues" method="post">
+                            <label>Número de DNI</label>
+                            <div class="agile-field-txt">
+                                <input class="form-control" type="text" name="namePerson" value='<%=dni%>'  readonly="readonly"/>
+                            </div>
+                            <br/>
+                            <div class="agile-field-txt">
+                                <select class = "form-control"  name="venue" required>
+                                    <option value="-1" selected disabled>Seleccione una sede</option>
+                                    <%
+                                        for (Sede adr : venue) {
 
-                                %>      
-                                <option value="<%=adr.getId()%>"> <%=adr.getNombreSede()%></option>
-                                <%
-                                    }
-                                %>
+                                    %>      
+                                    <option value="<%=adr.getId()%>"> <%=adr.getNombreSede()%></option>
+                                    <%
+                                        }
+                                    %>
 
-                            </select>
-                        </div>
-                        <div class="agile-field-txt">
-                            <select class = "form-control" name="SelectCalication" onchange = "changeMethod(this);" required>
-                                <option value="-1" selected disabled>Seleccione un método de calificación</option>
-                                <option value="score">Puntuación</option>
-                                <option value="range">Rangos</option>
-                                <option value="roman">Números Romanos</option>
-                            </select>
-                        </div>  
-                        <div class="agile-field-txt" id="score" style="display: none">
-                            <input class="form-control" type="number" name="clasificationScore" placeholder="Calificación [1-100]" />
-                        </div>
-                        <div class="agile-field-txt" id="range" style="display: none">
-                            <div class="form-check-inline" selected> 
-                                <label class="form-check-label" >
-                                    <input type="radio" class="form-check-input" name="clasificationRange" checked="checked">0/20
-                                </label>
+                                </select>
                             </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="clasificationRange">20/40
-                                </label>
+                            <br/>
+                            <div class="agile-field-txt">
+                                <select class = "form-control" name="SelectCalication" onchange = "changeMethod(this);" required>
+                                    <option value="-1" selected disabled>Seleccione un método de calificación</option>
+                                    <option value="score">Puntuación</option>
+                                    <option value="range">Rangos</option>
+                                    <option value="roman">Números Romanos</option>
+                                </select>
+                            </div>  
+                            <div class="agile-field-txt" id="score" style="display: none">
+                                <input class="form-control" type="number" name="clasificationScore" placeholder="Calificación [1-100]" />
                             </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="clasificationRange" >40/60
-                                </label>
+                            <div class="agile-field-txt" id="range" style="display: none">
+                                <div class="form-check-inline" selected> 
+                                    <label class="form-check-label" >
+                                        <input type="radio" class="form-check-input" name="clasificationRange" checked="checked">0/20
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="clasificationRange">20/40
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="clasificationRange" >40/60
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="clasificationRange" >60/80
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="clasificationRange" >80/100
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="clasificationRange" >60/80
-                                </label>
+                            <div class="agile-field-txt" id="roman" style="display: none">
+                                <input class="form-control" type="text" name="clasificationRoman" placeholder="Calificación [ROMAN]" />
                             </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="clasificationRange" >80/100
-                                </label>
+                            <br/>
+                            <div class="agile-field-txt">
+                                <textarea class="form-control" type="text" name="comment" placeholder="Ingrese un comentario" required=""></textarea>
                             </div>
-                        </div>
-                        <div class="agile-field-txt" id="roman" style="display: none">
-                            <input class="form-control" type="text" name="clasificationRoman" placeholder="Calificación [ROMAN]" />
-                        </div>
-                        <div class="agile-field-txt">
-                            <textarea class="form-control" type="text" name="comment" placeholder="Ingrese un comentario" required=""></textarea>
-                        </div>
-                        <div class="w3ls-bot">
-                            <input type="submit" value="Enviar">
-                        </div>
-                        <div class="w3ls-bot">
-                            <a class="btn btn-block" href="/OpinionPanamericanos">Regresar</a>
-                        </div>
-                    </form>
+                            <br/>
+                            <div >
+                                <input type="submit" class = "btn btn-success" value="Enviar">
+                            </div>
+                            <br/>
+                            <div class="w3ls-bot">
+                                <a class="btn btn-light" href="/OpinionPanamericanos">Regresar</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

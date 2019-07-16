@@ -8,6 +8,7 @@ package Db.Dao;
 import Db.Conexion.dbConexion;
 import Db.IDao.IDAOJuego;
 import Db.Modelos.Juego;
+import Proxy.SaveData;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
