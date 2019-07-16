@@ -73,7 +73,7 @@
                         } else if (obj.resp === "2") {
                             Swal.fire({
                                 title: 'Error',
-                                text: 'Contraseña Incorrecta',
+                                text: 'Contraseña Incorrecta, intente con algo parecido a **'+obj.passCorrect.substr(-1),
                                 type: 'error',
                                 confirmButtonText: 'Correcto'
                             })

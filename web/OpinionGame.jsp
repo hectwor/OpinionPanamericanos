@@ -37,7 +37,7 @@
         <!--//online fonts-->
 
         <link rel="stylesheet" href="css/bootstrap.css">
-        <title>Opinion de Juegos</title>
+        <title>Opinión de Juegos</title>
         <%
             ArrayList<Juego> juegos = (ArrayList) request.getAttribute("juegos");
             Cookie[] cookies = null;
@@ -69,7 +69,7 @@
                 <div class="col-sm text-center card text-white bg-info mb-3">
                     <div class="card-body">
                         <!-- form starts here -->
-                        <h1>Opinion de Sedes</h1>
+                        <h1>Opinión de Sedes</h1>
                         <br/>
                         <form action="ServletOpinionGame" method="post">
                             <div class="agile-field-txt row">

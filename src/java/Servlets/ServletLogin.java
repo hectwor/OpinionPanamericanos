@@ -7,6 +7,9 @@ package Servlets;
 
 import Db.Dao.DAOPersona;
 import Db.Modelos.Persona;
+import Memento.Caretaker;
+import Memento.Memento;
+import Memento.UserLoged;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -39,7 +42,7 @@ public class ServletLogin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletLogin</title>");            
+            out.println("<title>Servlet ServletLogin</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ServletLogin at " + request.getContextPath() + "</h1>");
@@ -62,38 +65,54 @@ public class ServletLogin extends HttpServlet {
             throws ServletException, IOException {
         String dni = request.getParameter("dni");
         String pass = request.getParameter("pass");
-        
+
         DAOPersona person = new DAOPersona();
         ArrayList<Persona> persons = new ArrayList();
         persons = person.getListaPersonas();
-        String resp="3";
+        String resp = "3";
+        Caretaker caretaker = new Caretaker();
+        boolean enter=false;
+        String passCorrect = "";
         for (Persona p : persons) {
-            if(dni.equals(p.getDni())){
-                if(pass.equals(p.getContrasena())){
-                    resp ="1";
+            UserLoged ul = new UserLoged();
+            ul.setNombre(p.getContrasena());
+            if (dni.equals(p.getDni())) {
+                if (pass.equals(p.getContrasena())) {
+                    resp = "1";
                     Cookie cookie = new Cookie("dni", p.getDni());
                     cookie.setMaxAge(60 * 60 * 24 * 7 * 360);
                     Cookie cookie2 = new Cookie("name", p.getNombre());
                     cookie2.setMaxAge(60 * 60 * 24 * 7 * 360);
                     response.addCookie(cookie);
                     response.addCookie(cookie2);
-                }else
-                    resp ="2";
+                } else {
+                    caretaker.addMemento(ul.saveToMemento());
+                    enter=true;
+                    resp = "2";
+                }
             }
+        }
+        if(enter){
+            Memento m1 = caretaker.getMemento(0);
+            passCorrect = m1.getSavedState();
         }
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("{"
                     + "\"resp\":\""
-                    +resp
+                    + resp
+                    + "\","
+                    + "\"passCorrect\":\""
+                    + passCorrect
                     + "\"}");
 
         }
-        
+
     }
-    public String validar(){
-        
+
+    public String validar() {
+
         return "";
     }
 
